@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+typedef struct {
+   int hora;
+   int minutos;
+   int segundos;
+} Horario;
+
+typedef struct {
+   int dia;
+   int mes;
+   int ano;
+} Data;
+
+typedef struct {
+   Data data;
+   Horario horario;
+   char texto[100];
+} Compromisso;
+
+int main() {
+   Horario horario;
+   Data data;
+   Compromisso compromisso;
+
+   horario.hora = 10;
+   horario.minutos = 30;
+   horario.segundos = 0;
+
+   data.dia = 15;
+   data.mes = 9;
+   data.ano = 2022;
+
+   compromisso.data = data;
+   compromisso.horario = horario;
+   strcpy(compromisso.texto, "Reunião de trabalho");
+
+   printf("Compromisso: %s
+", compromisso.texto);
+   printf("Data: %d/%d/%d
+", compromisso.data.dia, compromisso.data.mes, compromisso.data.ano);
+   printf("Horário: %d:%d:%d
+", compromisso.horario.hora, compromisso.horario.minutos, compromisso.horario.segundos);
+
+   return 0;
+}

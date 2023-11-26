@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Aluno {
+    int matricula;
+    char nome[50];
+    float nota1;
+    float nota2;
+    float nota3;
+    float media;
+};
+
+void cadastrarAluno(struct Aluno *aluno) {
+    printf("Matricula: ");
+    scanf("%d", &aluno->matricula);
+    printf("Nome: ");
+    scanf(" %[^\n]s", aluno->nome);
+    printf("Nota 1: ");
+    scanf("%f", &aluno->nota1);
+    printf("Nota 2: ");
+    scanf("%f", &aluno->nota2);
+    printf("Nota 3: ");
+    scanf("%f", &aluno->nota3);
+    
+    aluno->media = (aluno->nota1 + aluno->nota2 + aluno->nota3) / 3;
+}
+
+int main() {
+    struct Aluno alunos[5];
+    int i;
+    
+    printf("Cadastro dos alunos:\n");
+    for (i = 0; i < 5; i++) {
+        printf("\nAluno %d:\n", i+1);
+        cadastrarAluno(&alunos[i]);
+    }
+    
+    int indiceMaiorNota1 = 0;
+    for (i = 1; i < 5; i++) {
+        if (alunos[i].nota1 > alunos[indiceMaiorNota1].nota1) {
+            indiceMaiorNota1 = i;
+        }
+    }
+    printf("\nAluno com maior nota na primeira prova:\n");
+    printf("Matricula: %d
+", alunos[indiceMaiorNota1].matricula);
+    printf("Nome: %s
+", alunos[indiceMaiorNota1].nome);
+
+    int indiceMaiorMedia = 0;
+    for (i = 1; i < 5; i++) {
+        if (alunos[i].media > alunos[indiceMaiorMedia].media) {
+            indiceMaiorMedia = i;
+        }
+    }
+    printf("\nAluno com maior média geral:\n");
+    printf("Matricula: %d
+", alunos[indiceMaiorMedia].matricula);
+    printf("Nome: %s
+", alunos[indiceMaiorMedia].nome);
+    
+    int indiceMenorMedia = 0;
+    for (i = 1; i < 5; i++) {
+        if (alunos[i].media < alunos[indiceMenorMedia].media) {
+            indiceMenorMedia = i;
+        }
+    }
+    printf("\nAluno com menor média geral:\n");
+    printf("Matricula: %d
+", alunos[indiceMenorMedia].matricula);
+    printf("Nome: %s
+", alunos[indiceMenorMedia].nome);
+    
+    printf("\nAprovados e Reprovados:\n");
+    for (i = 0; i < 5; i++) {
+        printf("Aluno %d:\n", i+1);
+        printf("Matricula: %d
+", alunos[i].matricula);
+        printf("Nome: %s
+", alunos[i].nome);
+        printf("Media: %.2f
+", alunos[i].media);
+        
+        if (alunos[i].media >= 6) {
+            printf("Situacao: Aprovado
+");
+        } else {
+            printf("Situacao: Reprovado
+");
+        }
+        
+        printf("\n");
+    }
+    
+    return 0;
+}
